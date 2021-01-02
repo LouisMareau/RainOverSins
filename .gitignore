@@ -1,0 +1,27 @@
+# folders (excluded)
+.vscode
+Assets/Materials
+Assets/Presets
+Assets/Rocks and Boulders 2
+Assets/Scenes
+Assets/Settings
+Assets/Stylized Ground Textures
+Assets/Terrains
+Assets/TextMesh Pro
+Assets/Visual Design Cafe
+Library
+Logs
+obj
+Packages
+ProjectSettings
+Temp
+UserSettings
+
+
+# collab files (automatically generated)
+.collabignore
+
+# build files & solution
+Assembly-CSharp-Editor.csproj
+Assembly-CSharp.csproj
+RainOverSins.sln
