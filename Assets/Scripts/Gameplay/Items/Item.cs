@@ -8,6 +8,7 @@ namespace RoS.Gameplay.Items
     {
         [Header("CORE")]
         public int id;
+        private static int count;
         public new string name;
         [Multiline()] public string description;
         [HideInInspector] public string specsInfo;
@@ -17,6 +18,10 @@ namespace RoS.Gameplay.Items
         public float buyingCostBlu;
         [HideInInspector] public float sellingCostGold;
         [HideInInspector] public float sellingCostBlu;
+
+        public Item() {
+            id += count;
+        }
 
         private void OnValidate() {
             gameObject.name = this.name;
