@@ -1,5 +1,6 @@
 ﻿namespace RoS.Gameplay.UI
 {
+    using System.Collections.Generic;
     using UnityEngine;
     using TMPro;
     using RoS.Gameplay.Entities;
@@ -8,11 +9,14 @@
     {
         [HideInInspector] public NPC npc;
 
-        [Header("NPC CORE")]
+        [Header("CORE")]
         public new TextMeshProUGUI name;
         public TextMeshProUGUI title;
-        public TextMeshProUGUI types;
         public TextMeshProUGUI description;
+        
+        [Header("TYPES")]
+        public List<GameObject> typeIcons;
+        public Transform typeIconsList;
 
         public virtual void Init() {
             UpdateDisplay();

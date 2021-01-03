@@ -8,9 +8,9 @@ namespace RoS.Gameplay.UI
 
     public class NPCInterfaceMarchand : NPCInterface
     {
-        [Header("SELLERS")]
+        [Header("MARCHAND")]
         public TextMeshProUGUI marchandMessage;
-        public List<GameObject> items;
+        [HideInInspector] public List<GameObject> items;
         [Space()]
         public Transform itemList;
         public GameObject selectableItemPrefab;

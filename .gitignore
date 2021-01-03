@@ -24,3 +24,6 @@ UserSettings
 Assembly-CSharp-Editor.csproj
 Assembly-CSharp.csproj
 RainOverSins.sln
+
+# Unity .meta files
+Assets/Materials.meta
