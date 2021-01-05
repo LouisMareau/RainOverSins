@@ -7,14 +7,10 @@ namespace RoS.Gameplay.Entities
 
     public class NPC : Entity
     {
-        public enum NPCType {
-            QUEST,
-            MARCHAND,
-            DIALOGUE
-        }
-        
-        [Header("BEHAVIOUR")]
-        public NPCType npcType;
+        [Header("NPC TYPES")]
+        // ** Setup a enum that can have multiple options selected for easier access ** //
+        public bool isMarchand = false;
+        public bool isQuestGiver = false;
 
         [Header("PHYSICS")]
         private new Collider collider;
@@ -41,18 +37,10 @@ namespace RoS.Gameplay.Entities
             Transform npcModalT = GameObject.Find("Modals").transform;
             npcWindow = Instantiate<GameObject>(npcWindowPrefab, npcModalT.position, npcModalT.rotation, npcModalT);
 
-            switch (npcType) {
-                case NPCType.QUEST: break;
-                
-                case NPCType.MARCHAND:
-                    NPCInterfaceMarchand npcInterface = npcWindow.GetComponent<NPCInterfaceMarchand>();
-                    npcInterface.npc = this;
-                    npcInterface.Init();
-                    break;
-
-                case NPCType.DIALOGUE: break;
-
-                default: break;
+            if(isMarchand) {
+                NPCInterface npcInterface = npcWindow.GetComponent<NPCInterface>();
+                npcInterface.npc = this;
+                npcInterface.Init();
             }
         }
     }

@@ -14,12 +14,12 @@ namespace RoS.Gameplay.Items
         public TextMeshProUGUI costBlu;
         [HideInInspector] public GameObject itemGO;
         [HideInInspector] public Item item;
-        [HideInInspector] public NPCInterfaceMarchand marchandInterface;
+        [HideInInspector] public NPCInterface npcInterface;
 
-        public void Init(GameObject itemGO, NPCInterfaceMarchand interfaceMarchand) {
+        public void Init(GameObject itemGO, NPCInterface npcInterface) {
             this.itemGO = itemGO;
             this.item = itemGO.GetComponent<Item>();
-            this.marchandInterface = interfaceMarchand;
+            this.npcInterface = npcInterface;
 
             name.text = item.name;
             costGold.text = item.buyingCostGold.ToString("F0");
@@ -27,10 +27,10 @@ namespace RoS.Gameplay.Items
         }
 
         public void OnItemSelection() {
-            marchandInterface.selectedItemName.text = item.name;
-            marchandInterface.selectedItemDescription.text = item.description;
-            if (marchandInterface.selectedItemCostGold != null) { marchandInterface.selectedItemCostGold.text = item.buyingCostGold.ToString("F0"); }
-            if (marchandInterface.selectedItemCostBlu != null) { marchandInterface.selectedItemCostBlu.text = item.buyingCostBlu.ToString("F0"); }
+            npcInterface.selectedItemName.text = item.name;
+            npcInterface.selectedItemDescription.text = item.description;
+            if (npcInterface.selectedItemCostGold != null) { npcInterface.selectedItemCostGold.text = item.buyingCostGold.ToString("F0"); }
+            if (npcInterface.selectedItemCostBlu != null) { npcInterface.selectedItemCostBlu.text = item.buyingCostBlu.ToString("F0"); }
         }
 
         public void Buy() {
@@ -80,7 +80,7 @@ namespace RoS.Gameplay.Items
                     }
 
                     // We remove the item from the list
-                    marchandInterface.RemoveItemFromList(itemGO);
+                    npcInterface.RemoveItemFromList(itemGO);
                     // We destroy this game object, which will remove it from the npc interface
                     Destroy(this.gameObject);
                 }
