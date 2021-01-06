@@ -20,5 +20,14 @@ namespace RoS.Gameplay.Storages
         public int maxEntitiesStored; // The total amount allowed in the storage
         public List<Entity> storedEntities; // List of all the creatures owned by the player but aren't part of the active team, making them unable to fight
         [HideInInspector] public int storedAmount; // The current amount of creatures in the storage
+
+        public ExitCode AddEntityToStorage(Entity newEntity) {
+            // If the storage is full, we cannot add the entity to the storage and we exit the function with an ExitCode 3
+            if (storedEntities.Count >= maxEntitiesStored) { return ExitCode.Full_CSystem_Storage; }
+            else {
+                storedEntities.Add(newEntity);
+                return ExitCode.Success;
+            }
+        }
     }
 }
