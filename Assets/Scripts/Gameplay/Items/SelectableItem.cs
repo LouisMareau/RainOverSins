@@ -22,15 +22,15 @@ namespace RoS.Gameplay.Items
             this.npcInterface = npcInterface;
 
             name.text = item.name;
-            costGold.text = item.buyingCostGold.ToString("F0");
-            costBlu.text = item.buyingCostBlu.ToString("F0");
+            costGold.text = string.Format("G {0}", item.buyingCostGold.ToString("F0"));
+            costBlu.text = string.Format("B {0}", item.buyingCostBlu.ToString("F0"));
         }
 
         public void OnItemSelection() {
             npcInterface.selectedItemName.text = item.name;
             npcInterface.selectedItemDescription.text = item.description;
-            if (npcInterface.selectedItemCostGold != null) { npcInterface.selectedItemCostGold.text = item.buyingCostGold.ToString("F0"); }
-            if (npcInterface.selectedItemCostBlu != null) { npcInterface.selectedItemCostBlu.text = item.buyingCostBlu.ToString("F0"); }
+            if (npcInterface.selectedItemCostGold != null) { npcInterface.selectedItemCostGold.text = string.Format("G {0}", item.buyingCostGold.ToString("F0")); }
+            if (npcInterface.selectedItemCostBlu != null) { npcInterface.selectedItemCostBlu.text = string.Format("B {0}", item.buyingCostBlu.ToString("F0")); }
         }
 
         public void Buy() {
