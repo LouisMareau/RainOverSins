@@ -2,9 +2,8 @@ namespace RoS.Gameplay.Entities.Creatures
 {
     using UnityEngine;
     
-    public class Creature : Entity
+    public class Creature : PlayableEntity
     {
-        [Header("ATTRIBUTES")]
-        public Stats stats;
+        
     }
 }

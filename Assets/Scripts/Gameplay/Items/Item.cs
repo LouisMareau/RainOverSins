@@ -12,6 +12,9 @@ namespace RoS.Gameplay.Items
         [Multiline()] public string description;
         [HideInInspector] public string specsInfo;
 
+        [Header("BACKPACK")]
+        public int backpackWeight;
+
         [Header("MARCHAND INFO")]
         public float buyingCostGold;
         public float buyingCostBlu;

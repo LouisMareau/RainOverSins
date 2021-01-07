@@ -5,9 +5,9 @@ namespace RoS.Gameplay.Storages
     using RoS.Gameplay.Items;
 
     /// <summary>
-    /// The Heav'n storage system will be used as a creature storage with 2 different sections:
-    ///     • The active team
-    ///     • The stored creatures (will not be able to fight)
+    /// The Creature Storage system has 2 different usage:
+    ///     • Setup an active team that can be traded easily through a high energy rift
+    ///     • Store large amount of creatures but cannot use the high energy rift system used by the team (the creatures stored this way will not be able to fight)
     /// </summary>
     public class CSystem : Item
     {

@@ -7,11 +7,8 @@
     using RoS.Gameplay.Resources;
     using RoS.Gameplay.Storages;
     
-    public class Player : Entity
+    public class Player : PlayableEntity
     {
-        [Header("CORE")]
-        public Stats stats;
-
         [Header("RESOURCES")]
         public Resource gold;
         public Resource blu;
