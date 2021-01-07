@@ -23,17 +23,23 @@ namespace RoS.Gameplay.Storages
         /// Adds an item to the backpack, as long as there is still enough space.
         /// </summary>
         /// <param name="item"></param>
-        /// <returns>Returns TRUE if the item addition was successful (backpack not being full), and FALSE if the item couldn't be added because of full backpack.</returns>
-        public bool AddItem(Item item) {
-            if (items.Count <= maxItemSlots) {
+        /// <returns>Returns the associated ExitCode if the item addition was successful (backpack not being full)or if the item couldn't be added because of full backpack.</returns>
+        public ExitCode AddItem(Item item) {
+            // Case: Backpack full
+            if (items.Count >= maxItemSlots) { 
+                Debug.Log(string.Format("The backpack is full! Item \"{0}\" couldn't be added to the backpack..."));
+                return ExitCode.Full_Backpack_Storage; 
+            }
+            // Case: Backpack slot available (i.e item addition is a success)
+            else {
                 items.Add(item);
                 Debug.Log(string.Format("Item \"{0}\" has been added to the backpack!", item.name));
-                return true;
+                return ExitCode.Success;
             }
-            else {
-                Debug.Log(string.Format("The backpack is full! Item \"{0}\" couldn't be added to the backpack..."));
-                return false;
-            }
+        }
+
+        public void RemoveItem(Item item) {
+            items.Remove(item);
         }
     }
 }

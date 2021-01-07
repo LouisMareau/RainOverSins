@@ -69,11 +69,12 @@ namespace RoS.Gameplay.Items
                     }
                     else {
                         // We try to add the item to the backpack
-                        if (player.backpack.GetComponent<Backpack>().AddItem(item)) {
+                        ExitCode code = player.backpack.GetComponent<Backpack>().AddItem(item);
+                        if (code == ExitCode.Success) {
                             // Do something... ?
                         }
                         // If the backpack is full, we exit and show a message
-                        else {
+                        else if (code == ExitCode.Full_Backpack_Storage) {
                             Debug.Log(string.Format("Action of buying item \"{0} [{1}]\" canceled... Backpack is full!", item.name, item.id));
                             return;
                         }

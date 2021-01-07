@@ -3,7 +3,7 @@
 /// DO NOT MODIFY, IN ANY CASE, THIS FILE WITHOUT KNWOING EXACTLY WHAT YOU ARE DOING AND THE STRUCTURE OF THE JSON OBJECTS.
 /// </summary>
 
-namespace RoS.Gameplay.Creatures
+namespace RoS.Gameplay.Entities.Creatures
 {
     using System.Collections.Generic;
 

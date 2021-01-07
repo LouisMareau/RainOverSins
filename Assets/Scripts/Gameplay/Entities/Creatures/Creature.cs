@@ -1,4 +1,4 @@
-namespace RoS.Gameplay.Creatures
+namespace RoS.Gameplay.Entities.Creatures
 {
     using UnityEngine;
     
