@@ -20,5 +20,9 @@ namespace RoS.Gameplay.Entities
         [Header("STATE")]
         public State state;
         public int turnsSinceDeath;
+
+        private void OnValidate() {
+            stats.UpdateStats();
+        }
     }
 }

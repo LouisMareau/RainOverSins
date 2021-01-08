@@ -50,6 +50,7 @@ MonoBehaviour:
     These
     rifts are used to store any type of entities.'
   specsInfo: 
+  backpackWeight: 0
   buyingCostGold: 1500
   buyingCostBlu: 300
   sellingCostGold: 0

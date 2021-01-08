@@ -47,13 +47,22 @@ MonoBehaviour:
   name: Backpack TEST 1
   description: A simple backpack. Nothing crazy about it...
   specsInfo: 
+  backpackWeight: 0
   buyingCostGold: 400
   buyingCostBlu: 0
   sellingCostGold: 0
   sellingCostBlu: 0
   goldPocket:
+    name: Gold
+    description: 'The most common currency '
+    type: 0
     amount: 0
+    pool: 0
   bluPocket:
+    name: 
+    description: 
+    type: 0
     amount: 0
+    pool: 0
   maxItemSlots: 5
   items: []

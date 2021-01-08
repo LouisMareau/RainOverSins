@@ -34,6 +34,8 @@ namespace RoS.Gameplay.Items
                 health += (maxHealth * (healingPercentageAfterRevive / 100));
                 // We add the extra regen to the base regen of the creature
                 regen += this.regen;
+                // We check if (for some reasons) the health is higher than the max health of the entity, then we floor it to the max health value
+                if (health > maxHealth) { health = maxHealth; }
                 // We create a new status for the entity
                 entity.statuses.Add(new Status(Status.Type.REGENERATION, regen, regenDuration));
             }

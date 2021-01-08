@@ -31,9 +31,7 @@
             storagesT = transform.Find("Storages");
         }
 
-        private void OnValidate() {
-            stats.UpdateStats();
-        }
+        
 
         private void Update() {
             if (Input.GetMouseButton(0)) {

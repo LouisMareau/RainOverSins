@@ -92,10 +92,13 @@ namespace RoS.Gameplay
         public float focus;
 
         #region METOHDS
-        public float GetExpForNextLevel(int currentLevel) {
-            float exp = 1.43f;
+        /// <summary>
+        /// Returns the amount of experience necessary to get to the next level.    
+        /// </summary>
+        public float GetExpForNextLevel() {
+            float exp = 1.74f;
             float baseExp = 120;
-            return Mathf.Floor(baseExp * (Mathf.Pow(currentLevel, exp)));
+            return Mathf.Floor(baseExp * (Mathf.Pow(level, exp)));
         }
 
         public void LevelUp() {
@@ -103,7 +106,7 @@ namespace RoS.Gameplay
                 // We increase the subject level by 1
                 level++;
                 // We set the amount of exp necessary to get to the next level
-                nextLevelExp = GetExpForNextLevel(level);
+                nextLevelExp = GetExpForNextLevel();
                 // We reset the exp amount to 0
                 exp = 0;
 
@@ -128,6 +131,8 @@ namespace RoS.Gameplay
         }
 
         public void UpdateStats() {
+            nextLevelExp = GetExpForNextLevel();
+
             // Max Health
             // ----------------------------------------------
             //      -> +4 health per level

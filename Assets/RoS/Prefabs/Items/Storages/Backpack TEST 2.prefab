@@ -47,13 +47,22 @@ MonoBehaviour:
   name: Backpack TEST 2
   description: A simple worn backpack with few extra side pockets for extra room.
   specsInfo: 
+  backpackWeight: 0
   buyingCostGold: 800
   buyingCostBlu: 0
   sellingCostGold: 0
   sellingCostBlu: 0
   goldPocket:
+    name: 
+    description: 
+    type: 0
     amount: 0
+    pool: 0
   bluPocket:
+    name: 
+    description: 
+    type: 0
     amount: 0
+    pool: 0
   maxItemSlots: 5
   items: []
