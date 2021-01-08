@@ -10,10 +10,9 @@ namespace RoS.Gameplay.Items
         public int id;
         public new string name;
         [Multiline()] public string description;
-        [HideInInspector] public string specsInfo;
 
         [Header("BACKPACK")]
-        public int backpackWeight;
+        public float backpackWeight;
 
         [Header("MARCHAND INFO")]
         public float buyingCostGold;
@@ -21,7 +20,7 @@ namespace RoS.Gameplay.Items
         [HideInInspector] public float sellingCostGold;
         [HideInInspector] public float sellingCostBlu;
 
-        private void OnValidate() {
+        protected virtual void OnValidate() {
             gameObject.name = this.name;
         }
     }

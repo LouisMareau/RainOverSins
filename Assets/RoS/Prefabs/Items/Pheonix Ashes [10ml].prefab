@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3687822292764393568
+--- !u!1 &3325420354245910565
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,56 +8,53 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3687822292764393571}
-  - component: {fileID: 3687822292764393570}
+  - component: {fileID: 3325420354245910563}
+  - component: {fileID: 4220555405572852964}
   m_Layer: 0
-  m_Name: C-System TEST 1
+  m_Name: Pheonix Ashes [10ml]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3687822292764393571
+--- !u!4 &3325420354245910563
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3687822292764393568}
+  m_GameObject: {fileID: 3325420354245910565}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -12.83, y: 1.22, z: -40.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3687822292764393570
+--- !u!114 &4220555405572852964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3687822292764393568}
+  m_GameObject: {fileID: 3325420354245910565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5d3e4f999fe8644a9411737b70c8211, type: 3}
+  m_Script: {fileID: 11500000, guid: eba9981dc7e605048a9c5c17d72a8ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
-  name: C-System TEST 1
-  description: 'A strange device that can open and close interdimensional rifts.
-
-    These
-    rifts are used to store any type of entities.'
-  specsInfo: 
-  backpackWeight: 0
-  buyingCostGold: 1500
-  buyingCostBlu: 300
+  id: 6
+  name: Pheonix Ashes [50ml]
+  description: "These ashes has been scooped right after the death of a pheonix,
+    right before its rebirth.\nThis little bottle contains enough ashes to wipe clean
+    the 100m\xB2 area around the fiery resurrection.\nBe careful of the fiery rebirth
+    !"
+  backpackWeight: 0.05
+  buyingCostGold: 7500000
+  buyingCostBlu: 60000
   sellingCostGold: 0
   sellingCostBlu: 0
-  teamCost: 6
-  activeTeam: []
-  cost: 0
-  maxEntitiesStored: 4
-  storedEntities: []
-  storedAmount: 0
+  uses: 1
+  healingPercentageAfterRevive: 5
+  regen: 8
+  regenDuration: 5

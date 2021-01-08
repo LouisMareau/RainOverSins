@@ -17,11 +17,7 @@ namespace RoS.Gameplay.Resources
         public float amount;
         public float pool;
 
-        private void OnValidate() {
-            
-        }
-
-        private void Init() {
+        public void Init() {
             switch (type) {
                 case Type.GOLD:
                     this.name = "Gold";

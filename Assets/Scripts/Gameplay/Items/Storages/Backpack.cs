@@ -16,8 +16,14 @@ namespace RoS.Gameplay.Storages
         public Currency goldPocket;
         public Currency bluPocket;
         [Space()]
-        public int maxItemSlots;
+        public float maxWeight;
         public List<Item> items;
+
+        protected override void OnValidate() {
+            base.OnValidate();
+            goldPocket.Init();
+            bluPocket.Init();
+        }
 
         /// <summary>
         /// Adds an item to the backpack, as long as there is still enough space.
@@ -26,9 +32,10 @@ namespace RoS.Gameplay.Storages
         /// <returns>Returns the associated ExitCode if the item addition was successful (backpack not being full)or if the item couldn't be added because of full backpack.</returns>
         public ExitCode AddItem(Item item) {
             // Case: Backpack full
-            if (items.Count >= maxItemSlots) { 
+            // We check if the total amount of weight in the backpack with the added the weight of the item doesn't exceed the limit weight of the backpack
+            if (GetTotalWeight() + item.backpackWeight > maxWeight) { 
                 Debug.Log(string.Format("The backpack is full! Item \"{0}\" couldn't be added to the backpack..."));
-                return ExitCode.Full_Backpack_Storage; 
+                return ExitCode.Full_Backpack_Storage;
             }
             // Case: Backpack slot available (i.e item addition is a success)
             else {
@@ -40,6 +47,14 @@ namespace RoS.Gameplay.Storages
 
         public void RemoveItem(Item item) {
             items.Remove(item);
+        }
+
+        public float GetTotalWeight() {
+            float weight = 0;
+            foreach (Item item in items) {
+                weight += item.backpackWeight;
+            }
+            return weight;
         }
     }
 }

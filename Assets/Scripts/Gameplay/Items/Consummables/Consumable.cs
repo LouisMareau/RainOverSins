@@ -7,6 +7,6 @@ namespace RoS.Gameplay.Items
     public class Consumable : Item
     {
         [Header("CONSUMABLE")]
-        public int usagePerTurn; // Defines the amount of time the item can be used within one turn
+        public int uses; // Defines the amount of time the item can be used
     }
 }
