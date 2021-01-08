@@ -35,12 +35,13 @@ namespace RoS.Gameplay.Items
 
         public void Buy() {
             Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            Backpack backpack = player.backpack.GetComponent<Backpack>();
             if (player) {
                 // We check if the player has enough gold and blu to buy the item
-                if (player.gold.amount >= item.buyingCostGold && player.blu.amount >= item.buyingCostBlu) {
+                if (backpack.goldPocket.amount >= item.buyingCostGold && backpack.bluPocket.amount >= item.buyingCostBlu) {
                     // We substract the cost of the items off the player
-                    player.gold.amount -= item.buyingCostGold;
-                    player.blu.amount -= item.buyingCostBlu;
+                    backpack.goldPocket.amount -= item.buyingCostGold;
+                    backpack.bluPocket.amount -= item.buyingCostBlu;
 
                     // We check if the items are Backpacks or C-Systems, since they are not added to a backpack, but replaces the current backpack or C-System
                     if (item.GetType() == typeof(Backpack)) {
@@ -48,10 +49,10 @@ namespace RoS.Gameplay.Items
                         // * ADDITION: Ask the player if he/she is sure to remove the current backpack *
                         // * ADDITION: Give the player the ability to switch its items to the new backpack he/she is about the buy *
                         if (player.storagesT.childCount > 0) { Destroy(player.backpack); }
-                        // We create a clone of the backpack prefab and add it to the "Storages" game object
 
-                        GameObject backpack = Instantiate<GameObject>(itemGO, Vector3.zero, Quaternion.identity, player.storagesT);
-                        player.backpack = backpack;
+                        // We create a clone of the backpack prefab and add it to the "Storages" game object
+                        GameObject newBackpack = Instantiate<GameObject>(itemGO, Vector3.zero, Quaternion.identity, player.storagesT);
+                        player.backpack = newBackpack;
                         Debug.Log("Player's BACKPACK has changed!");
                         Debug.Log(string.Format("{0} GOLD and {1} BLU has been debited from the player...", item.buyingCostGold, item.buyingCostBlu));
                     }
@@ -86,8 +87,8 @@ namespace RoS.Gameplay.Items
                     Destroy(this.gameObject);
                 }
                 else {
-                    if (player.gold.amount < item.buyingCostGold) { Debug.Log("The Player doesn'thave enough Gold to buy the item..."); }
-                    else if (player.blu.amount < item.buyingCostBlu) { Debug.Log("The Player doesn't have enough Blu to buy the item..."); }
+                    if (backpack.goldPocket.amount < item.buyingCostGold) { Debug.Log("The Player doesn'thave enough Gold to buy the item..."); }
+                    else if (backpack.bluPocket.amount < item.buyingCostBlu) { Debug.Log("The Player doesn't have enough Blu to buy the item..."); }
                 }
             }
             else {

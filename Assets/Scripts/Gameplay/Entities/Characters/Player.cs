@@ -9,10 +9,6 @@
     
     public class Player : PlayableEntity
     {
-        [Header("RESOURCES")]
-        public Resource gold;
-        public Resource blu;
-
         [Header("STORAGES")]
         public GameObject backpack;
         public GameObject cSystem;

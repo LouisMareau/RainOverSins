@@ -13,8 +13,8 @@ namespace RoS.Gameplay.Storages
     public class Backpack : Item
     {
         [Header("STORAGE")]
-        public Resource goldPocket;
-        public Resource bluPocket;
+        public Currency goldPocket;
+        public Currency bluPocket;
         [Space()]
         public int maxItemSlots;
         public List<Item> items;
