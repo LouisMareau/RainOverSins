@@ -49,10 +49,11 @@ MonoBehaviour:
     trinckets.
 
     May have to choose carefully what you put in there...'
+  thumbnail: {fileID: 0}
   backpackWeight: 0
   buyingCostGold: 0
-  buyingCostBlu: 0
   sellingCostGold: 0
+  buyingCostBlu: 0
   sellingCostBlu: 0
   goldPocket:
     name: Gold

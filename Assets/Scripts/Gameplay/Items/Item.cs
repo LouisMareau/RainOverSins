@@ -10,18 +10,19 @@ namespace RoS.Gameplay.Items
         public int id;
         public new string name;
         [Multiline()] public string description;
+        public Sprite thumbnail;
 
         [Header("BACKPACK")]
         public float backpackWeight;
 
-        [Header("MARCHAND INFO")]
-        public float buyingCostGold;
-        public float buyingCostBlu;
-        [HideInInspector] public float sellingCostGold;
-        [HideInInspector] public float sellingCostBlu;
+        [Header("TRADE INFO")]
+        public Trade tradeInfo;
 
         protected virtual void OnValidate() {
             gameObject.name = this.name;
+
+            tradeInfo.CalculateCosts();
         }
+
     }
 }

@@ -44,15 +44,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 6
-  name: Pheonix Ashes [50ml]
+  name: Pheonix Ashes [10ml]
   description: "These ashes has been scooped right after the death of a pheonix,
     right before its rebirth.\nThis little bottle contains enough ashes to wipe clean
     the 100m\xB2 area around the fiery resurrection.\nBe careful of the fiery rebirth
     !"
-  backpackWeight: 0.05
+  thumbnail: {fileID: 0}
+  backpackWeight: 0.01
   buyingCostGold: 7500000
-  buyingCostBlu: 60000
   sellingCostGold: 0
+  buyingCostBlu: 60000
   sellingCostBlu: 0
   uses: 1
   healingPercentageAfterRevive: 5

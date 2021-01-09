@@ -50,10 +50,11 @@ MonoBehaviour:
 
     Nobody seems to know who invented this technology but
     they are very appreciated by the Olidorian community.'
+  thumbnail: {fileID: 0}
   backpackWeight: 0
   buyingCostGold: 20
-  buyingCostBlu: 1
   sellingCostGold: 0
+  buyingCostBlu: 1
   sellingCostBlu: 0
   goldPocket:
     name: Gold

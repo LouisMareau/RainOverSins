@@ -53,10 +53,11 @@ MonoBehaviour:
 
     Strength seems to be adjustable, if
     you know what your doing...'
+  thumbnail: {fileID: 0}
   backpackWeight: 0.2
   buyingCostGold: 10
-  buyingCostBlu: 0
   sellingCostGold: 0
+  buyingCostBlu: 0
   sellingCostBlu: 0
   uses: 2
   fixedHealth: 30
