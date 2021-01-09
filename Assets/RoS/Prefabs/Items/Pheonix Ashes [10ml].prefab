@@ -51,10 +51,15 @@ MonoBehaviour:
     !"
   thumbnail: {fileID: 0}
   backpackWeight: 0.01
-  buyingCostGold: 7500000
-  sellingCostGold: 0
-  buyingCostBlu: 60000
-  sellingCostBlu: 0
+  tradeInfo:
+    baseCostGold: 0
+    baseCostBlu: 0
+    suggestedCostGold: 0
+    suggestedCostBlu: 0
+    marchandCostGold: 0
+    marchandCostBlu: 0
+    sellingPriceGold: 0
+    sellingPriceBlu: 0
   uses: 1
   healingPercentageAfterRevive: 5
   regen: 8

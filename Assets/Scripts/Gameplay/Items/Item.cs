@@ -20,7 +20,6 @@ namespace RoS.Gameplay.Items
 
         protected virtual void OnValidate() {
             gameObject.name = this.name;
-
             tradeInfo.CalculateCosts();
         }
 

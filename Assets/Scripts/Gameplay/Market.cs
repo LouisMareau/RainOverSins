@@ -4,8 +4,8 @@ namespace RoS.Gameplay
     public class Market
     {
         /// <summary>
-        /// Marchand taxes are present to force the player to sell its own items and make money that way.
-        /// This should force crafting and doing in-game jobs.<br/>
+        /// Marchand taxes are present to force the player to sell its own items and make money.
+        /// This should force crafting and doing in-game jobs. Marchand prices should always to higher than the suggested cost.<br/>
         /// Marchand taxes have to be set automatically and be global.
         /// </summary>
         public static float marchandTaxes;

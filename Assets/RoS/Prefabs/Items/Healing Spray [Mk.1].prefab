@@ -55,10 +55,15 @@ MonoBehaviour:
     you know what your doing...'
   thumbnail: {fileID: 0}
   backpackWeight: 0.2
-  buyingCostGold: 10
-  sellingCostGold: 0
-  buyingCostBlu: 0
-  sellingCostBlu: 0
+  tradeInfo:
+    baseCostGold: 0
+    baseCostBlu: 0
+    suggestedCostGold: 0
+    suggestedCostBlu: 0
+    marchandCostGold: 0
+    marchandCostBlu: 0
+    sellingPriceGold: 0
+    sellingPriceBlu: 0
   uses: 2
   fixedHealth: 30
   regen: 5

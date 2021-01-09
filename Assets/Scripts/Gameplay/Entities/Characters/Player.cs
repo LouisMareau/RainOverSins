@@ -32,6 +32,7 @@
         }
 
         private void Update() {
+
             if (Input.GetMouseButton(0)) {
                 Ray r = CameraDirector.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
