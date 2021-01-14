@@ -14,8 +14,8 @@ namespace RoS.Gameplay.Resources
         public Type type;
 
         [Header("QUANTITY")]
-        public float amount;
         public float pool;
+        [HideInInspector] public float amount;
 
         public void Init() {
             switch (type) {

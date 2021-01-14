@@ -41,12 +41,14 @@ namespace RoS.Gameplay.Items
         /// * The player should have full control over selling its own items. *
         /// <br/> The Gold value of the item must be set by the player but if left blank, it should be equal to the suggested cost in Gold
         /// </summary>
+        [HideInInspector]
         public float sellingPriceGold;
 
         /// <summary>
         /// * The player should have full control over selling its own items. * 
         /// <br/> The Blu value of the item must be set by the player but if left blank, it should be equal to the suggested cost in Blu
         /// </summary>
+        [HideInInspector]
         public float sellingPriceBlu;
 
         public void CalculateCosts() {

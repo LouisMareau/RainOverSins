@@ -21,7 +21,7 @@ namespace RoS.Gameplay.Entities
 
         [Header("SELLER")]
         public string sellingMessage; // The line the NPC says when buying from it
-        public List<GameObject> itemsToSell; // The item its selling
+        public List<Item> itemsToSell; // The item its selling
 
         private void Awake() {
             collider = GetComponent<Collider>();

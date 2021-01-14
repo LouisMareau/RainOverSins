@@ -10,6 +10,7 @@ namespace RoS.Gameplay.Storages
     /// The Backpack must allow the player to carry items.
     /// Backpacks should be craftable by the player, can be bought from NPCs and sellable to other players (online)
     /// </summary>
+    [CreateAssetMenu(fileName = "New Backpack", menuName = "RoS/Items/Backpack")]
     public class Backpack : Item
     {
         [Header("STORAGE")]

@@ -14,7 +14,7 @@ namespace RoS.Gameplay.Items
         [Range(0f, 100f)] public float healingPercentageAfterRevive; // The percentage the entity's health is going to be healed for (based on the maxHealth) 
         public float regen; // The amount of regen that will be added to the entity's base regen
         public int regenDuration; // The amount of turns the extra regen will be applied to the entity's base regen
-      
+        
         /// <summary>
         /// Uses the item (Pheonix Ashes variant) on the specific playable entity and consumes it.
         /// Being consumed, it will then be removed from the backpack storage (see Backpack class for removal definition).       

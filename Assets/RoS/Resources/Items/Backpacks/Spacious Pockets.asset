@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58e7ae7e3d4ea845a7136e9b7194471, type: 3}
+  m_Name: Spacious Pockets
+  m_EditorClassIdentifier: 
+  name: Spacious Pockets
+  description: 'They really seem to create some weird stuff these days...
+
+    I
+    can just slap those pockets to my cloths and use them to carry stuff.
+
+    And
+    they are so spacious!'
+  thumbnail: {fileID: 0}
+  backpackWeight: 0
+  amount: 0
+  tradeInfo:
+    baseCostGold: 20
+    baseCostBlu: 10
+    suggestedCostGold: 20
+    suggestedCostBlu: 10
+    marchandCostGold: 25
+    marchandCostBlu: 12.5
+    sellingPriceGold: 20
+    sellingPriceBlu: 10
+  goldPocket:
+    name: Gold
+    description: The most common currency on Olidor. It can be traded against (almost)
+      anything, with (almost) anyone.
+    type: 0
+    pool: 50
+    amount: 0
+  bluPocket:
+    name: Blu
+    description: A rare currency infused with mana that can only be crafted by mana-infused
+      individuals. Its rarity is intrinsic to the rarity of the materials composing
+      the coin itself. The mana serves as a stamp of authenticity, tracking back
+      to the maker itself.
+    type: 1
+    pool: 20
+    amount: 0
+  maxWeight: 4
+  items: []

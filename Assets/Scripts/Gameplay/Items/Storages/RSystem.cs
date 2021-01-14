@@ -5,11 +5,12 @@ namespace RoS.Gameplay.Storages
     using RoS.Gameplay.Items;
 
     /// <summary>
-    /// The Creature Storage system has 2 different usage:
+    /// The Rift Storage system has 2 different usage:
     ///     • Setup an active team that can be traded easily through a high energy rift
-    ///     • Store large amount of creatures but cannot use the high energy rift system used by the team (the creatures stored this way will not be able to fight)
+    ///     • Store a larger amount of creatures but cannot use the high energy rift system used by the team (the creatures stored this way will not be able to fight)
     /// </summary>
-    public class CSystem : Item
+    [CreateAssetMenu(fileName = "New RSystem", menuName = "RoS/Items/RSystem")]
+    public class RSystem : Item
     {
         [Header("ACTIVE TEAM")]
         public int teamCost; // The total cost allowed in the active team
@@ -23,7 +24,7 @@ namespace RoS.Gameplay.Storages
 
         public ExitCode AddEntityToStorage(Entity newEntity) {
             // If the storage is full, we cannot add the entity to the storage and we exit the function with an ExitCode 3
-            if (storedEntities.Count >= maxEntitiesStored) { return ExitCode.Full_CSystem_Storage; }
+            if (storedEntities.Count >= maxEntitiesStored) { return ExitCode.Full_RSystem_Storage; }
             else {
                 storedEntities.Add(newEntity);
                 return ExitCode.Success;

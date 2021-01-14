@@ -3,7 +3,7 @@
 /// </summary>
 public enum ExitCode {
     Success = 0, // Returns a success for any type of action/output
-    Full_CSystem_Storage = 1, // CSystem storedEntities.Count >= CSystem.maxEntitiesStored
+    Full_RSystem_Storage = 1, // RSystem storedEntities.Count >= RSystem.maxEntitiesStored
     Full_Backpack_Storage = 2, // Backpack items.Count >= Backpack.maxItemSlots
     Entity_HP_Maxed = 3, // Entity's HP >= entity.stats.maxHealth
     Entity_Dead = 4, // Entity's HP <= 0

@@ -10,8 +10,8 @@
     public class Player : PlayableEntity
     {
         [Header("STORAGES")]
-        public GameObject backpack;
-        public GameObject cSystem;
+        public Backpack backpack;
+        public RSystem rSystem;
 
         [Header("POINT Of INTEREST")]
         public Transform pointOfInterest;

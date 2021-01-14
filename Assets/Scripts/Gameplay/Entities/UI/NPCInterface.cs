@@ -23,7 +23,9 @@
 
         [Header("MARCHAND")]
         public TextMeshProUGUI marchandMessage;
-        [HideInInspector] public List<GameObject> items;
+        [HideInInspector] public List<Item> items;
+        [Space()]
+        private int listViewID;
         [Space()]
         public Transform itemList;
         public GameObject selectableItemPrefab;
@@ -51,9 +53,7 @@
                     marchandMessage.text = string.Format("\"\n {0} \n\"", npc.sellingMessage);
 
                     items = npc.itemsToSell;
-                    foreach (GameObject item in items) {
-                        AddItemToList(item);
-                    }
+                    SetupItemsToSellList();
                 }
             }
         }
@@ -67,28 +67,65 @@
             if (npc.isQuestGiver) { Instantiate<GameObject>(typeIcons[1], typeIconsList.position, typeIconsList.rotation, typeIconsList); }
         }
 
+        public void DisplayListView(int id) {
+            listViewID = id;
+            
+            switch (listViewID) {
+                // View ID 0 => GRID
+                case 0:
+                    // ** Display the list as a grid
+                    break;
+                
+                case 1:
+                    // ** Display the list as a list
+                    break;
+
+                default:
+                    // ** Display the list as a grid
+                    break;
+            }
+        } 
+
         #region MARCHAND (TYPE)
+        public void SetupItemsToSellList() {
+            foreach (Item item in items) {
+                // We first setup all the items in the list, with their respective amounts
+                CreateSelectableItem(item);
+            }
+        }
+
         /// <summary>
         /// Adds an item to the marchand interface's list associated with the NPC.
         /// </summary>
         /// <param name="item">The item to add to the list.</param>
-        public void AddItemToList(GameObject item) {
-            GameObject newItemGO = Instantiate<GameObject>(selectableItemPrefab, selectableItemPrefab.transform.position, selectableItemPrefab.transform.rotation, itemList);
-            SelectableItem newSelectableItem = newItemGO.GetComponent<SelectableItem>();
+        public void CreateSelectableItem(Item item) {
+            GameObject newSelectableItemGO = Instantiate<GameObject>(selectableItemPrefab, selectableItemPrefab.transform.position, selectableItemPrefab.transform.rotation, itemList);
+            SelectableItem newSelectableItem = newSelectableItemGO.GetComponent<SelectableItem>();
             newSelectableItem.Init(item, this);
         }
 
         /// <summary>
         /// Removes an item from the NPC and from the marchand interface's list associated with the NPC.
-        /// Though, it does not remove the item displayed on the screen, only the one from the variable list (NPCInterfaceMarchand.items).
         /// </summary>
         /// <param name="item">The item to remove from the list.</param>
-        public void RemoveItemFromList(GameObject item) {
-            // We remove the item from the npc
-            bool removed = npc.itemsToSell.Remove(item);
-            if (removed) {
-                // If removed, we remove it from the item list as well
-                items.Remove(item);
+        public void RemoveItemFromList(Item item, int amount) {
+            // We remove the amount of items specified from the NPC
+            foreach (Item npcItem in npc.itemsToSell) {
+                if (npcItem == item) {
+                    // NPC's list
+                    npcItem.amount -= amount;
+                    // NPC's Interface's list (from this interface)
+                    item.amount -= amount;
+                    // If the amount reaches 0, we remove the item from the NPC's "items to sell" list
+                    // We also make sure the npc's list and its interface are sync
+                    if (npcItem.amount <= 0 && item.amount <= 0) { 
+                        npc.itemsToSell.Remove(npcItem);
+                        items.Remove(item);
+                    }
+                }
+                else {
+                    Debug.Log(string.Format("The item \"{0}\" couldn't be found... Try again."));
+                }
             }
         }
         #endregion

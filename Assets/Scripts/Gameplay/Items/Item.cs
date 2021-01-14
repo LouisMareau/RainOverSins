@@ -4,22 +4,22 @@ namespace RoS.Gameplay.Items
     using RoS.Gameplay.Storages;
 
     [System.Serializable]
-    public class Item : MonoBehaviour
+    [CreateAssetMenu(fileName = "New Item", menuName = "RoS/Items/Item")]
+    public class Item : ScriptableObject
     {
         [Header("CORE")]
-        public int id;
         public new string name;
         [Multiline()] public string description;
         public Sprite thumbnail;
 
-        [Header("BACKPACK")]
+        [Header("INVENTORY")]
         public float backpackWeight;
+        public int amount;
 
         [Header("TRADE INFO")]
         public Trade tradeInfo;
 
         protected virtual void OnValidate() {
-            gameObject.name = this.name;
             tradeInfo.CalculateCosts();
         }
 
