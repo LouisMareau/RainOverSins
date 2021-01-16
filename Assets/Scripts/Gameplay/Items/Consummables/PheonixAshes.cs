@@ -8,13 +8,14 @@ namespace RoS.Gameplay.Items
     /// Once dead, the creature outside the fight cannot be revived by any object. Only a Great Pheonix can revive dead creatures, after the fight they died at is over.
     /// Pheonix ashes are extremely rare and cannot be found from NPC. They can only be dropped by a Great Pheonix.
     /// </summary>
+    [System.Serializable]
     public class PheonixAshes : Consumable
     {
         [Header("HEAL")]
         [Range(0f, 100f)] public float healingPercentageAfterRevive; // The percentage the entity's health is going to be healed for (based on the maxHealth) 
         public float regen; // The amount of regen that will be added to the entity's base regen
         public int regenDuration; // The amount of turns the extra regen will be applied to the entity's base regen
-        
+
         /// <summary>
         /// Uses the item (Pheonix Ashes variant) on the specific playable entity and consumes it.
         /// Being consumed, it will then be removed from the backpack storage (see Backpack class for removal definition).       

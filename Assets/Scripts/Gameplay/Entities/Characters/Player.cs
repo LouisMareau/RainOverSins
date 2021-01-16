@@ -4,14 +4,13 @@
     using UnityEngine.AI;
 
     using RoS.Camera;
-    using RoS.Gameplay.Resources;
-    using RoS.Gameplay.Storages;
+    using RoS.Gameplay.Equipment;
+    using RoS.Gameplay.Equipment.Storages;
     
     public class Player : PlayableEntity
     {
-        [Header("STORAGES")]
-        public Backpack backpack;
-        public RSystem rSystem;
+        [Header("INVENTORY")]
+        public Equipment equipment;
 
         [Header("POINT Of INTEREST")]
         public Transform pointOfInterest;

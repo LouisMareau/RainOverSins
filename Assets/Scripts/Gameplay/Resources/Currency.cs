@@ -1,9 +1,10 @@
-namespace RoS.Gameplay.Resources
+namespace RoS.Gameplay.Items
 {
     using UnityEngine;
+    using RoS.Gameplay.Items;
 
     [System.Serializable]
-    public class Currency : Resource
+    public class Currency : Item
     {
         public enum Type {
             GOLD,
@@ -13,11 +14,7 @@ namespace RoS.Gameplay.Resources
         [Header("TYPE")]
         public Type type;
 
-        [Header("QUANTITY")]
-        public float pool;
-        [HideInInspector] public float amount;
-
-        public void Init() {
+        protected override void OnValidate() {
             switch (type) {
                 case Type.GOLD:
                     this.name = "Gold";

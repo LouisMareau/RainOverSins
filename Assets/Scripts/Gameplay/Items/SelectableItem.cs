@@ -3,53 +3,77 @@ namespace RoS.Gameplay.Items
     using UnityEngine;
     using TMPro;
     using RoS.Gameplay.Entities;
-    using RoS.Gameplay.Storages;
-    using RoS.Gameplay.UI;
+    using RoS.Gameplay.Items;
+    using RoS.Gameplay.Entities.UI;
+    using RoS.Gameplay.Equipment.Storages;
 
     [System.Serializable]
     public class SelectableItem : MonoBehaviour
     {
-        public new TextMeshProUGUI name;
-        public TextMeshProUGUI costGold;
-        public TextMeshProUGUI costBlu;
-        public TextMeshProUGUI npcCurrentAmount;
-        [HideInInspector] public Item itemToSell;
-        [HideInInspector] public int npcSellingAmount;
-        [HideInInspector] public NPCInterface npcInterface;
+        // ** Make a custom editor that would display the correct variables for each type of viewing options
+        // ** The cost can be any item desired as any item can be traded, with a default value as Gold (if no item was chosen)
 
-        public void Init(Item itemToSell, NPCInterface npcInterface) {
-            this.npcInterface = npcInterface;
+        /// <summary>
+        /// A reference to the name of the item.
+        /// </summary>
+        public new TextMeshProUGUI name;
+
+        /// <summary>
+        /// ** Temporary variable
+        /// A reference to the total amount of gold for the transaction (amount included).
+        /// </summary>
+        public TextMeshProUGUI unitCostGold;
+
+        /// <summary>
+        /// A reference to the amount of this item the npc owns.
+        /// </summary>
+        public TextMeshProUGUI npcCurrentAmount;
+
+        /// <summary>
+        /// The item that this selectable will target (the item to sell).
+        /// </summary>
+        public StackableItem itemToSell;
+
+        /// <summary>
+        /// The amount of the item that will be sold (at once).
+        /// </summary>
+        public int tradeAmount = 1;
+
+        /// <summary>
+        /// A reference to the merchand interface (UI).
+        /// </summary>
+        public MerchandInterface merchandInterface;
+
+        public void Init(StackableItem itemToSell, MerchandInterface merchandInterface) {
+            this.merchandInterface = merchandInterface;
             this.itemToSell = itemToSell;
 
-            name.text = itemToSell.name;
-            costGold.text = string.Format("G {0}", itemToSell.tradeInfo.marchandCostGold.ToString("F0"));
-            costBlu.text = string.Format("B {0}", itemToSell.tradeInfo.marchandCostBlu.ToString("F0"));
-            npcCurrentAmount.text = itemToSell.amount.ToString("F0");
+            // We setup the core info (should be hidden until selected)
+            name.text = this.itemToSell.item.name;
+            unitCostGold.text = string.Format("G {0}", this.itemToSell.item.tradeInfo.marchandCostGold.ToString("F0"));
+            npcCurrentAmount.text = this.itemToSell.amount.ToString("F0");
         }
 
         public void OnItemSelection() {
-            npcInterface.selectedItemName.text = itemToSell.name;
-            npcInterface.selectedItemDescription.text = itemToSell.description;
-            if (npcInterface.selectedItemCostGold != null) { npcInterface.selectedItemCostGold.text = string.Format("G {0}", itemToSell.tradeInfo.marchandCostGold.ToString("F0")); }
-            if (npcInterface.selectedItemCostBlu != null) { npcInterface.selectedItemCostBlu.text = string.Format("B {0}", itemToSell.tradeInfo.marchandCostBlu.ToString("F0")); }
+            // ** Show popup when the selectable item has been clicked, displaying basic info and interaction
         }
 
         public void Buy() {
+            Item item = itemToSell.item;
             Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-            Backpack backpack = player.backpack;
-            RSystem rSystem = player.rSystem;
-            Trade tradeInfo = itemToSell.tradeInfo;
+            Backpack backpack = player.equipment.backpack;
+            RSystem rSystem = player.equipment.rSystem;
+            Trade tradeInfo = item.tradeInfo;
             if (player && backpack != null) {
                 // We check if the player has enough gold and blu to buy the item
-                if (backpack.goldPocket.amount >= tradeInfo.marchandCostGold && backpack.bluPocket.amount >= tradeInfo.marchandCostBlu) {
-                    // We substract the cost of the items off the player
-                    backpack.goldPocket.amount -= tradeInfo.marchandCostGold;
-                    backpack.bluPocket.amount -= tradeInfo.marchandCostBlu;
+                if (backpack.GetCurrencyAmount(Currency.Type.GOLD) >= tradeInfo.marchandCostGold && backpack.GetCurrencyAmount(Currency.Type.BLU) >= tradeInfo.marchandCostBlu) {
+                    // We substract the cost of the item
+                    backpack.GetCurrency(Currency.Type.GOLD).amount -= tradeInfo.marchandCostGold;
 
-                    // We check if the items are Backpacks or C-Systems, since they are not added to a backpack, but replaces the current backpack or C-System
-                    if (itemToSell.GetType() == typeof(Backpack)) {
+                    // We check if the items are Backpacks or C-Systems, since they are not added to a backpack, but replaces the current backpack or C-System (under Player.Equipment)
+                    if (item.GetType() == typeof(Backpack)) {
                         // We replace any existing backpack with the new one
-                        backpack = (Backpack)itemToSell;
+                        backpack = (Backpack)item;
                         
                         // * ADDITION: Ask the player if he/she is sure to remove the current backpack *
                         // * ADDITION: Give the player the ability to switch its items to the new backpack he/she is about the buy *
@@ -57,9 +81,9 @@ namespace RoS.Gameplay.Items
                         Debug.Log("Player's BACKPACK has changed!");
                         Debug.Log(string.Format("{0} GOLD and {1} BLU has been debited from the player...", tradeInfo.marchandCostGold, tradeInfo.marchandCostBlu));
                     }
-                    else if (itemToSell.GetType() == typeof(RSystem)) {
+                    else if (item.GetType() == typeof(RSystem)) {
                         // We replace any existing RSystem with the new one
-                        rSystem = (RSystem)itemToSell;
+                        rSystem = (RSystem)item;
 
                         // * ADDITION: Ask the player if he/she is sure to remove the current c-system *
                         // * NOTE: The csystem carries over automatically all the entities to the new one, the rift key/ID being the same one *
@@ -68,34 +92,26 @@ namespace RoS.Gameplay.Items
                         Debug.Log(string.Format("{0} GOLD and {1} BLU has been debited from the player...", tradeInfo.marchandCostGold, tradeInfo.marchandCostBlu));
                     }
                     else {
-                        // We try to add the item to the backpack (where all the other items should be stored)
-                        // If the backpack already has the item, we add the amount specified in the amount field...
-                        foreach (Item item in backpack.items) {
-                            if (item == itemToSell) {
-                                item.amount += this.npcSellingAmount;
-                            }
-                        }
-
                         // ...Otherwise, we add the new item to the backpack list
-                        ExitCode add = backpack.AddItem(itemToSell);
-                        if (add == ExitCode.Success) {
-                            // Do something... ?
+                        ExitCode add = backpack.AddItem(itemToSell, tradeAmount);
+                        if (add == ExitCode.Backpack_AmountIncreased) {
+                            // We display a message saying that the item was already in the backpack and its amount has increased
+                            Debug.Log(string.Format("The item \"{0}\" is already in the backpack. The amount has increased by {1}.\nTotal amount: {2}", item.name, tradeAmount, itemToSell.amount));
                         }
-                        else if (add == ExitCode.Full_Backpack_Storage) {
+                        else if (add == ExitCode.Backpack_Full) {
                             // We display a message saying that the backpack is full and the item couldn't be added
-                            Debug.Log(string.Format("Action of buying item \"{0}\" canceled... Backpack is full!", itemToSell.name));
+                            Debug.Log(string.Format("Action of buying item \"{0}\" canceled... Backpack is full!", item.name));
                             return;
                         }
                     }
 
-                    // We remove the item from the list
-                    npcInterface.RemoveItemFromList(itemToSell, npcSellingAmount);
+                    // Then, we remove the item from the list before destroying this object if amount = 0
+                    merchandInterface.RemoveItem(itemToSell, tradeAmount);
                     // We destroy this game object, which will remove it from the npc interface
                     Destroy(this.gameObject);
                 }
                 else {
-                    if (backpack.goldPocket.amount < tradeInfo.marchandCostGold) { Debug.Log("The Player doesn'thave enough Gold to buy the item..."); }
-                    else if (backpack.bluPocket.amount < tradeInfo.marchandCostBlu) { Debug.Log("The Player doesn't have enough Blu to buy the item..."); }
+                    if (backpack.GetCurrency(Currency.Type.GOLD).amount < tradeInfo.marchandCostGold) { Debug.Log("The Player doesn'thave enough Gold to buy the item..."); }
                 }
             }
             else {

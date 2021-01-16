@@ -8,55 +8,55 @@ namespace RoS.Gameplay.Items
         /// <summary>
         /// This is the base Gold price for the item. Supply and Demand calculations aren't included in the base cost value
         /// </summary>
-        public float baseCostGold;
+        public int baseCostGold;
 
         /// <summary>
         /// This is the base Blu price for the item. Supply and Demand calculations aren't included in the base cost value
         /// </summary>
-        public float baseCostBlu; 
+        public int baseCostBlu; 
 
         [Space()]
 
         /// <summary>
         /// Suggested price (in Gold) of the item after market value calculations (help for players)
         /// </summary>
-        public float suggestedCostGold;
+        public int suggestedCostGold;
 
         /// <summary>
         /// Suggested price (in Blu) of the item after market value calculations (help for player)
         /// </summary>
-        public float suggestedCostBlu;
+        public int suggestedCostBlu;
 
         /// <summary>
         /// The final, real cost of the item in Gold after supply and demand calculations and inflation are applied (NPCs should have an increase of prices (25% increase of base cost))
         /// </summary>
-        public float marchandCostGold;
+        public int marchandCostGold;
 
         /// <summary>
         /// The final, real cost of the item in Blu after supply and demand calculations and inflation are applied (NPCs shoudl have an increase of prices (25% increase of base cost))
         /// </summary>
-        public float marchandCostBlu;
+        public int marchandCostBlu;
 
         /// <summary>
         /// * The player should have full control over selling its own items. *
         /// <br/> The Gold value of the item must be set by the player but if left blank, it should be equal to the suggested cost in Gold
         /// </summary>
         [HideInInspector]
-        public float sellingPriceGold;
+        public int sellingPriceGold;
 
         /// <summary>
         /// * The player should have full control over selling its own items. * 
         /// <br/> The Blu value of the item must be set by the player but if left blank, it should be equal to the suggested cost in Blu
         /// </summary>
         [HideInInspector]
-        public float sellingPriceBlu;
+        public int sellingPriceBlu;
 
         public void CalculateCosts() {
-            suggestedCostGold = baseCostGold * Market.inflation;
-            suggestedCostBlu = baseCostBlu * Market.inflation;
+            suggestedCostGold = Mathf.RoundToInt(baseCostGold * Market.inflation);
+            suggestedCostBlu = Mathf.RoundToInt(baseCostBlu * Market.inflation);
 
-            marchandCostGold = suggestedCostGold + (suggestedCostGold * Market.marchandTaxes);
-            marchandCostBlu = suggestedCostBlu + (suggestedCostBlu * Market.marchandTaxes);
+            marchandCostGold = Mathf.RoundToInt(suggestedCostGold + (suggestedCostGold * Market.marchandTaxes));
+            marchandCostBlu = Mathf.RoundToInt(suggestedCostBlu + (suggestedCostBlu * Market.marchandTaxes));
 
             sellingPriceGold = suggestedCostGold;
             sellingPriceBlu = suggestedCostBlu;
