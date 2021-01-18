@@ -3,7 +3,6 @@ namespace RoS.Gameplay.Items
     using UnityEngine;
     using TMPro;
     using RoS.Gameplay.Entities;
-    using RoS.Gameplay.Items;
     using RoS.Gameplay.Entities.UI;
     using RoS.Gameplay.Equipment.Storages;
 
@@ -19,15 +18,20 @@ namespace RoS.Gameplay.Items
         public new TextMeshProUGUI name;
 
         /// <summary>
+        /// A reference to the amount of this item the npc owns.
+        /// </summary>
+        public TextMeshProUGUI npcCurrentAmount;
+
+        /// <summary>
+        /// A reference to the foldout (containing trade info).
+        /// </summary>
+        public GameObject foldout;
+
+        /// <summary>
         /// ** Temporary variable
         /// A reference to the total amount of gold for the transaction (amount included).
         /// </summary>
         public TextMeshProUGUI unitCostGold;
-
-        /// <summary>
-        /// A reference to the amount of this item the npc owns.
-        /// </summary>
-        public TextMeshProUGUI npcCurrentAmount;
 
         /// <summary>
         /// The item that this selectable will target (the item to sell).
@@ -55,7 +59,29 @@ namespace RoS.Gameplay.Items
         }
 
         public void OnItemSelection() {
-            // ** Show popup when the selectable item has been clicked, displaying basic info and interaction
+            if (!foldout.activeSelf) { 
+                // We close any other foldout (active)
+                // We show the foldout
+                foldout.SetActive(true);
+                // We actualize the item info from merchandInterface
+                merchandInterface.selectedItemIcon.sprite = itemToSell.item.thumbnail;
+                merchandInterface.selectedItemName.text = itemToSell.item.name;
+                merchandInterface.selectedItemDesctiption.text = itemToSell.item.description;
+                // We place the foldout at the end of the list so it appears in front of the items
+                foldout.transform.SetParent(merchandInterface.listTransform);
+                foldout.transform.SetAsLastSibling();
+            }
+            else { 
+                // We reset the transform of the foldout
+                foldout.transform.SetParent(this.transform);
+                foldout.transform.SetAsLastSibling();
+                // We reset the item info from merchandInterface
+                merchandInterface.selectedItemIcon.sprite = null;
+                merchandInterface.selectedItemName.text = "";
+                merchandInterface.selectedItemDesctiption.text = "";
+                // We hide the foldout
+                foldout.SetActive(false);
+            }
         }
 
         public void Buy() {
@@ -66,7 +92,7 @@ namespace RoS.Gameplay.Items
             Trade tradeInfo = item.tradeInfo;
             if (player && backpack != null) {
                 // We check if the player has enough gold and blu to buy the item
-                if (backpack.GetCurrencyAmount(Currency.Type.GOLD) >= tradeInfo.marchandCostGold && backpack.GetCurrencyAmount(Currency.Type.BLU) >= tradeInfo.marchandCostBlu) {
+                if (backpack.GetCurrencyAmount(Currency.Type.GOLD) >= tradeInfo.marchandCostGold) {
                     // We substract the cost of the item
                     backpack.GetCurrency(Currency.Type.GOLD).amount -= tradeInfo.marchandCostGold;
 
@@ -79,7 +105,7 @@ namespace RoS.Gameplay.Items
                         // * ADDITION: Give the player the ability to switch its items to the new backpack he/she is about the buy *
 
                         Debug.Log("Player's BACKPACK has changed!");
-                        Debug.Log(string.Format("{0} GOLD and {1} BLU has been debited from the player...", tradeInfo.marchandCostGold, tradeInfo.marchandCostBlu));
+                        Debug.Log(string.Format("{0} GOLD has been debited from the player...", tradeInfo.marchandCostGold));
                     }
                     else if (item.GetType() == typeof(RSystem)) {
                         // We replace any existing RSystem with the new one
@@ -89,7 +115,7 @@ namespace RoS.Gameplay.Items
                         // * NOTE: The csystem carries over automatically all the entities to the new one, the rift key/ID being the same one *
 
                         Debug.Log("Player's C-SYSTEM has changed!");
-                        Debug.Log(string.Format("{0} GOLD and {1} BLU has been debited from the player...", tradeInfo.marchandCostGold, tradeInfo.marchandCostBlu));
+                        Debug.Log(string.Format("{0} GOLD has been debited from the player...", tradeInfo.marchandCostGold));
                     }
                     else {
                         // ...Otherwise, we add the new item to the backpack list

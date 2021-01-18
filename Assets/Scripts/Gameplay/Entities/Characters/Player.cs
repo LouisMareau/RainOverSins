@@ -17,7 +17,7 @@
         public float poiMaxDistanceCheck;
         public float poiSearchRadius;
 
-        #region Local References
+        #region LOCAL REFERENCES
         [HideInInspector] public Transform storagesT;
         private GameObject modals;
         private NavMeshAgent navMeshAgent;
@@ -31,7 +31,7 @@
         }
 
         private void Update() {
-
+            
             if (Input.GetMouseButton(0)) {
                 Ray r = CameraDirector.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;

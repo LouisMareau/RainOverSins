@@ -8,11 +8,11 @@ namespace RoS.Gameplay.Entities
     [System.Serializable]
     public class MerchandInfo
     {
-        [Header("ITEMS")]
-        public List<StackableItem> itemsToSell;
-
         [Header("UI")]
         public MerchandInterface merchandInterface;
+
+        [Header("ITEMS")]
+        public List<StackableItem> itemsToSell;
 
         public void ShowInterface(NPC npc) {
             if (!merchandInterface.gameObject.activeSelf) {
@@ -20,15 +20,5 @@ namespace RoS.Gameplay.Entities
                 merchandInterface.Init(npc);
             }
         }
-
-        public void CloseInterface() {
-            if (merchandInterface.gameObject.activeSelf) {
-                merchandInterface.gameObject.SetActive(false);
-            }
-        }
-
-        
-
-        
     }
 }

@@ -2,6 +2,7 @@ namespace RoS.Gameplay.Entities.UI
 {
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.UI;
     using TMPro;
     using RoS.Gameplay.Items;
 
@@ -20,7 +21,7 @@ namespace RoS.Gameplay.Entities.UI
         public Transform listTransform;
 
         [Header("SELECTED ITEM")]
-        public Sprite selectedItemIcon;
+        public Image selectedItemIcon;
         public TextMeshProUGUI selectedItemName;
         public TextMeshProUGUI selectedItemDesctiption;
 
@@ -33,6 +34,12 @@ namespace RoS.Gameplay.Entities.UI
             
             // We populate the list with selectable items
             PopulateItemList(npc.merchandInfo.itemsToSell);
+        }
+
+        public void CloseInterface() {
+            if (this.gameObject.activeSelf) {
+                this.gameObject.SetActive(false);
+            }
         }
 
         /// <summary>

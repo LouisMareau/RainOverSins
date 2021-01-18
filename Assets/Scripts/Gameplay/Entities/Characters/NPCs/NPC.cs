@@ -14,20 +14,11 @@ namespace RoS.Gameplay.Entities
         [Header("PHYSICS")]
         private new Collider collider;
 
-        [Header("UI")]
-        public GameObject npcWindow;
-
         [Header("MERCHAND")]
         public MerchandInfo merchandInfo;
 
         private void Awake() {
             collider = GetComponent<Collider>();
-        }
-
-        private void Update() {
-            if (npcWindow.activeSelf && Input.GetKeyDown(KeyCode.Escape)) {
-                // code later???
-            }
         }
 
         public void OnSelection() {

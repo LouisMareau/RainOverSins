@@ -26,6 +26,8 @@ namespace RoS.Gameplay.Items
                     this.description = "A rare currency infused with mana that can only be crafted by mana-infused individuals. Its rarity is intrinsic to the rarity of the materials composing the coin itself. The mana serves as a stamp of authenticity, tracking back to the maker itself.";
                 break;
             }
+
+            tradeInfo.CalculateCosts();
         }
     }
 }

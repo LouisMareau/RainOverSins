@@ -49,13 +49,9 @@ MonoBehaviour:
   weight: 0
   tradeInfo:
     baseCostGold: 0
-    baseCostBlu: 0
     suggestedCostGold: 0
-    suggestedCostBlu: 0
     marchandCostGold: 0
-    marchandCostBlu: 0
     sellingPriceGold: 0
-    sellingPriceBlu: 0
   items: []
   totalWeight: 0
   maxWeight: 0
