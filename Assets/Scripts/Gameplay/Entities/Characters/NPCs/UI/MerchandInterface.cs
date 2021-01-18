@@ -38,6 +38,17 @@ namespace RoS.Gameplay.Entities.UI
 
         public void CloseInterface() {
             if (this.gameObject.activeSelf) {
+                // We remove the open modal from the game manager
+                GameManager.openModals.Remove(this.gameObject);
+
+                // We make sure that the list of selectable items is empty
+                foreach (SelectableItem instance in selectableItems) {
+                    Destroy(instance.gameObject);
+                }
+                // Make sure we clear the list to assure that we do not have any null object remaining
+                selectableItems.Clear();
+
+                // We close the modal by setting its active state to false
                 this.gameObject.SetActive(false);
             }
         }

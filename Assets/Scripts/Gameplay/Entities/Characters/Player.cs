@@ -19,27 +19,29 @@
 
         #region LOCAL REFERENCES
         [HideInInspector] public Transform storagesT;
-        private GameObject modals;
         private NavMeshAgent navMeshAgent;
         #endregion
 
         private void Awake() {
             // Local References
-            modals = GameObject.Find("Modals");
             navMeshAgent = GetComponent<NavMeshAgent>();
             storagesT = transform.Find("Storages");
         }
 
         private void Update() {
-            
             if (Input.GetMouseButton(0)) {
-                Ray r = CameraDirector.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(r, out hit)) {
-                    if (modals.transform.childCount == 0) {
+                // We need to make sure that no modal is open in order to do any action in the world
+                if (GameManager.openModals.Count == 0) {
+                    // We cast a ray
+                    Ray r = CameraDirector.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
+                    if (Physics.Raycast(r, out hit)) {
+                        // In case we hit the ground/terrain, we move to the clicked location
                         if (hit.collider.gameObject.tag == "Terrain" && navMeshAgent.isOnNavMesh) {
                             Move(hit);
                         }
+
+                        // In case we hit an NPC, we start an interaction with the NPC
                         if (hit.collider.gameObject.tag == "NPC") {
                             hit.collider.gameObject.GetComponent<NPC>().OnSelection();
                         }
