@@ -18,7 +18,7 @@ namespace RoS.Gameplay.Items
         /// <summary>
         /// The final, real cost of the item in Gold after supply and demand calculations and inflation are applied (NPCs should have an increase of prices (25% increase of base cost))
         /// </summary>
-        public int marchandCostGold;
+        public int merchantCostGold;
 
         /// <summary>
         /// * The player should have full control over selling its own items. *
@@ -28,8 +28,13 @@ namespace RoS.Gameplay.Items
         public int sellingPriceGold;
 
         public void CalculateCosts() {
+            // We calculate the suggested cost in Gold
             suggestedCostGold = Mathf.RoundToInt(baseCostGold * Market.inflation);
-            marchandCostGold = Mathf.RoundToInt(suggestedCostGold + (suggestedCostGold * Market.marchandTaxes));
+
+            // We calculate the merchant cost in Gold
+            merchantCostGold = Mathf.RoundToInt(suggestedCostGold + (suggestedCostGold * Market.merchantTaxes));
+
+            // We calculate the selling price in Gold
             sellingPriceGold = suggestedCostGold;
         }   
     }

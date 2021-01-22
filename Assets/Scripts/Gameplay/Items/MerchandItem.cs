@@ -1,7 +1,7 @@
 namespace RoS.Gameplay.Items
 {
     [System.Serializable]
-    public class MerchandItem
+    public class MerchantItem
     {
         /// <summary>
         /// The item that can be stacked. This means that the item can have multiple copies of itself possessed by the player.

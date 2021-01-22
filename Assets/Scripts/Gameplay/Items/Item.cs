@@ -5,6 +5,8 @@ namespace RoS.Gameplay.Items
     [System.Serializable]
     public class Item : MonoBehaviour
     {
+        // ** Create a custom editor to create/setup/edit rapidly items
+
         [Header("CORE")]
         public new string name;
         [Multiline()] public string description;

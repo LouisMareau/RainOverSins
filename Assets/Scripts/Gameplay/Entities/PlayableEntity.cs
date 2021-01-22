@@ -5,7 +5,7 @@ namespace RoS.Gameplay.Entities
     
     public class PlayableEntity : Entity
     {
-        public enum State {
+        public enum BattleState {
             ALIVE,
             DEAD_RECENTLY,
             DEAD_LATE
@@ -17,12 +17,19 @@ namespace RoS.Gameplay.Entities
         [Header("STATUSES")]
         public List<Status> statuses;
 
-        [Header("STATE")]
-        public State state;
+        [Header("PHYSICS")]
+        private new Collider collider;
+
+        [Header("BATTLE")]
+        public BattleState battleState;
         public int turnsSinceDeath;
 
         private void OnValidate() {
             stats.UpdateStats();
+        }
+
+        private void Awake() {
+            collider = GetComponent<Collider>();
         }
     }
 }

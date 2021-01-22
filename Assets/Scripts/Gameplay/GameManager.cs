@@ -13,9 +13,9 @@ namespace RoS.Gameplay
 
         [Header("MARKET INFO")]
         /// <summary>
-        /// The marchand tax over every item in stock.
+        /// The merchant tax over every item in stock.
         /// </summary>
-        public float marchandTaxes = 0.25f;
+        public float merchantTaxes = 0.25f;
 
         public float inflation = 1.00f;
 
@@ -23,8 +23,8 @@ namespace RoS.Gameplay
             // We initialize the open modals list as an empty list
             openModals = new List<GameObject>();
 
-            // We set the marchand taxes. This taxe should be added to the base cost of every item sold by marchand NPCs
-            Market.marchandTaxes = this.marchandTaxes;
+            // We set the merchant taxes. This taxe should be added to the base cost of every item sold by merchant NPCs
+            Market.merchantTaxes = this.merchantTaxes;
             // We set the base inflation for the market (should be set to 1.00 by default)
             Market.inflation = this.inflation;
         }

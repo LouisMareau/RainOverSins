@@ -1,7 +1,6 @@
 namespace RoS.Gameplay.Items
 {
     using UnityEngine;
-    using RoS.Gameplay.Items;
 
     [System.Serializable]
     public class Currency : Item

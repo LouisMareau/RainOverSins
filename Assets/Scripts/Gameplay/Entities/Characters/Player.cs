@@ -5,7 +5,6 @@
 
     using RoS.Camera;
     using RoS.Gameplay.Equipment;
-    using RoS.Gameplay.Equipment.Storages;
     
     public class Player : PlayableEntity
     {

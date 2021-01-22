@@ -1,0 +1,22 @@
+namespace RoS.Gameplay.Items.Editor
+{
+    using UnityEngine;
+    using UnityEditor;
+
+    public class CraftEditor : EditorWindow
+    {
+        public static void ShowWindow() {
+            var window = GetWindow<CraftEditor>();
+            window.titleContent = new GUIContent("Craft Bench");
+            window.Show();
+        }
+
+        private void OnGUI() {
+            //* Reference to the item
+            //* List of items necessary to craft the item
+            //* Amount of gold necessary to complete the craft
+            //* Location(s) and method (anvil, mana-infused anvil, forge, unique location, etc...) where the item can be crafted
+            //* Export data to Item prefab (ask to replace any previous data)
+        }
+    }
+}

@@ -28,9 +28,9 @@ namespace RoS.Gameplay.Items
             float regen = entity.stats.healthRegen;
 
             // To be usable, the entity needs to be recently dead (within the last three (3) turns)
-            if (entity.state == PlayableEntity.State.ALIVE) { return ExitCode.Entity_Alive; }
-            else if (entity.state == PlayableEntity.State.DEAD_LATE) { return ExitCode.Entity_Dead_Late; }
-            else if (entity.state == PlayableEntity.State.DEAD_RECENTLY) {
+            if (entity.battleState == PlayableEntity.BattleState.ALIVE) { return ExitCode.Entity_Alive; }
+            else if (entity.battleState == PlayableEntity.BattleState.DEAD_LATE) { return ExitCode.Entity_Dead_Late; }
+            else if (entity.battleState == PlayableEntity.BattleState.DEAD_RECENTLY) {
                 // We heal the entity's health by the healing amount
                 health += (maxHealth * (healingPercentageAfterRevive / 100));
                 // We add the extra regen to the base regen of the creature

@@ -4,7 +4,6 @@ namespace RoS.Gameplay.Items
     using TMPro;
     using RoS.Gameplay.Entities;
     using RoS.Gameplay.Entities.UI;
-    using RoS.Gameplay.Equipment.Storages;
 
     [System.Serializable]
     public class SelectableItem : MonoBehaviour
@@ -46,42 +45,62 @@ namespace RoS.Gameplay.Items
         /// <summary>
         /// A reference to the merchand interface (UI).
         /// </summary>
-        public MerchandInterface merchandInterface;
+        public MerchantInterface merchantInterface;
 
-        public void Init(StackableItem itemToSell, MerchandInterface merchandInterface) {
-            this.merchandInterface = merchandInterface;
+        public void Init(StackableItem itemToSell, MerchantInterface merchantInterface) {
+            this.merchantInterface = merchantInterface;
             this.itemToSell = itemToSell;
 
             // We setup the core info (should be hidden until selected)
             name.text = this.itemToSell.item.name;
-            unitCostGold.text = string.Format("G {0}", this.itemToSell.item.tradeInfo.marchandCostGold.ToString("F0"));
+            unitCostGold.text = string.Format("G {0}", this.itemToSell.item.tradeInfo.merchantCostGold.ToString("F0"));
             npcCurrentAmount.text = this.itemToSell.amount.ToString("F0");
         }
 
         public void OnItemSelection() {
             if (!foldout.activeSelf) { 
-                // We close any other foldout (active)
-                // We show the foldout
-                foldout.SetActive(true);
-                // We actualize the item info from merchandInterface
-                merchandInterface.selectedItemIcon.sprite = itemToSell.item.thumbnail;
-                merchandInterface.selectedItemName.text = itemToSell.item.name;
-                merchandInterface.selectedItemDesctiption.text = itemToSell.item.description;
-                // We place the foldout at the end of the list so it appears in front of the items
-                foldout.transform.SetParent(merchandInterface.listTransform);
-                foldout.transform.SetAsLastSibling();
+                // We close any other active foldout (different than this one)
+                foreach (SelectableItem selectableItem in merchantInterface.selectableItems) {
+                    if (selectableItem != this) {
+                        if (selectableItem.foldout.activeSelf) {
+                            selectableItem.CloseFoldout();
+                        }
+                    }
+                }
+                // We open the foldout
+                OpenFoldout();
             }
             else { 
-                // We reset the transform of the foldout
+                CloseFoldout();
+            }
+        }
+
+        public void OpenFoldout() {
+            // We first actualize the item info from the merchant interface class
+            merchantInterface.selectedItemIcon.sprite = itemToSell.item.thumbnail;
+            merchantInterface.selectedItemName.text = itemToSell.item.name;
+            merchantInterface.selectedItemDescription.text = itemToSell.item.description;
+            // We then place the foldout at the end of the list so it appears in front of the other items
+            if (foldout.transform.parent != merchantInterface.listTransform) {
+                foldout.transform.SetParent(merchantInterface.listTransform);
+                foldout.transform.SetAsLastSibling();
+            }
+            // Finally, we show the foldout
+            foldout.SetActive(true); 
+        }
+
+        public void CloseFoldout() {
+            // We make sure to reset the transform of the foldout to be child of this object
+            if (foldout.transform.parent != this.transform) {
                 foldout.transform.SetParent(this.transform);
                 foldout.transform.SetAsLastSibling();
-                // We reset the item info from merchandInterface
-                merchandInterface.selectedItemIcon.sprite = null;
-                merchandInterface.selectedItemName.text = "";
-                merchandInterface.selectedItemDesctiption.text = "";
-                // We hide the foldout
-                foldout.SetActive(false);
             }
+            // We clear the item info from merchantInterface
+            merchantInterface.selectedItemIcon.sprite = null;
+            merchantInterface.selectedItemName.text = "";
+            merchantInterface.selectedItemDescription.text = "";
+            // We hide the foldout
+            foldout.SetActive(false);
         }
 
         public void Buy() {
@@ -92,20 +111,21 @@ namespace RoS.Gameplay.Items
             Trade tradeInfo = item.tradeInfo;
             if (player && backpack != null) {
                 // We check if the player has enough gold and blu to buy the item
-                if (backpack.GetCurrencyAmount(Currency.Type.GOLD) >= tradeInfo.marchandCostGold) {
+                if (backpack.GetCurrencyAmount(Currency.Type.GOLD) >= tradeInfo.merchantCostGold) {
                     // We substract the cost of the item
-                    backpack.GetCurrency(Currency.Type.GOLD).amount -= tradeInfo.marchandCostGold;
+                    backpack.GetCurrency(Currency.Type.GOLD).amount -= tradeInfo.merchantCostGold;
 
                     // We check if the items are Backpacks or C-Systems, since they are not added to a backpack, but replaces the current backpack or C-System (under Player.Equipment)
                     if (item.GetType() == typeof(Backpack)) {
-                        // We replace any existing backpack with the new one
-                        backpack = (Backpack)item;
-                        
+
                         // * ADDITION: Ask the player if he/she is sure to remove the current backpack *
                         // * ADDITION: Give the player the ability to switch its items to the new backpack he/she is about the buy *
 
+                        // We replace any existing backpack with the new one
+                        backpack = (Backpack)item;
+
                         Debug.Log("Player's BACKPACK has changed!");
-                        Debug.Log(string.Format("{0} GOLD has been debited from the player...", tradeInfo.marchandCostGold));
+                        Debug.Log(string.Format("{0} GOLD has been debited from the player...", tradeInfo.merchantCostGold));
                     }
                     else if (item.GetType() == typeof(RSystem)) {
                         // We replace any existing RSystem with the new one
@@ -115,7 +135,7 @@ namespace RoS.Gameplay.Items
                         // * NOTE: The csystem carries over automatically all the entities to the new one, the rift key/ID being the same one *
 
                         Debug.Log("Player's C-SYSTEM has changed!");
-                        Debug.Log(string.Format("{0} GOLD has been debited from the player...", tradeInfo.marchandCostGold));
+                        Debug.Log(string.Format("{0} GOLD has been debited from the player...", tradeInfo.merchantCostGold));
                     }
                     else {
                         // ...Otherwise, we add the new item to the backpack list
@@ -132,12 +152,12 @@ namespace RoS.Gameplay.Items
                     }
 
                     // Then, we remove the item from the list before destroying this object if amount = 0
-                    merchandInterface.RemoveItem(itemToSell, tradeAmount);
+                    merchantInterface.RemoveItem(itemToSell, tradeAmount);
                     // We destroy this game object, which will remove it from the npc interface
                     Destroy(this.gameObject);
                 }
                 else {
-                    if (backpack.GetCurrency(Currency.Type.GOLD).amount < tradeInfo.marchandCostGold) { Debug.Log("The Player doesn'thave enough Gold to buy the item..."); }
+                    if (backpack.GetCurrency(Currency.Type.GOLD).amount < tradeInfo.merchantCostGold) { Debug.Log("The Player doesn'thave enough Gold to buy the item..."); }
                 }
             }
             else {

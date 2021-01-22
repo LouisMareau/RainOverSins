@@ -8,7 +8,7 @@ namespace RoS.Gameplay
         /// This should force crafting and doing in-game jobs. Marchand prices should always to higher than the suggested cost.<br/>
         /// Marchand taxes have to be set automatically and be global.
         /// </summary>
-        public static float marchandTaxes;
+        public static float merchantTaxes;
 
         /// <summary>
         /// Inflation must be processed on all transactitons, without any excepions.<br/>

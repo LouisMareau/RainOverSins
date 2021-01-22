@@ -50,7 +50,7 @@ MonoBehaviour:
   tradeInfo:
     baseCostGold: 0
     suggestedCostGold: 0
-    marchandCostGold: 0
+    merchantCostGold: 0
     sellingPriceGold: 0
   items: []
   totalWeight: 0

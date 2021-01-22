@@ -1,4 +1,4 @@
-namespace RoS.Gameplay.Equipment.Storages
+namespace RoS.Gameplay.Items
 {
     using System.Collections.Generic;
     using UnityEngine;
@@ -7,7 +7,7 @@ namespace RoS.Gameplay.Equipment.Storages
 
     /// <summary>
     /// The Backpack must allow the player to carry items.
-    /// Backpacks should be craftable by the player, can be bought from NPCs and sellable to other players (online)
+    /// Backpacks should be craftable by the player, can be bought from NPCs and sellable to other players (online trading)
     /// </summary>
     [System.Serializable]
     public class Backpack : Item
