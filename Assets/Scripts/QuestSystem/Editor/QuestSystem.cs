@@ -1,10 +1,10 @@
-namespace RoS.QuestSystem.Editor
+namespace RoS.Gameplay.QuestSystem.Editor
 {
     using System;
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEditor;
-    using RoS.QuestSystem.Utils;
+    using RoS.Gameplay.QuestSystem.Utils;
     
     public class QuestSystem : EditorWindow 
     {
@@ -26,7 +26,7 @@ namespace RoS.QuestSystem.Editor
         }
     
         private void OnGUI() {
-            if (GUILayout.Button("New Quest")) { QuestEditor.Init(); }
+            if (GUILayout.Button("New Quest")) { QuestEditor.ShowWindow(); }
 
             EditorGUILayout.LabelField("QUESTS", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;

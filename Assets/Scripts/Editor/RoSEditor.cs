@@ -3,6 +3,7 @@ namespace RoS
     using UnityEngine;
     using UnityEditor;
 
+    using RoS.Gameplay.QuestSystem.Editor;
     using RoS.Gameplay.Entities.Editor;
     using RoS.Gameplay.Items.Editor;
 
@@ -16,8 +17,9 @@ namespace RoS
         }
 
         private void OnGUI() {
-            if (GUILayout.Button("Item Editor")) { ItemEditor.ShowWindow(); }
             if (GUILayout.Button("Entity Editor")) { EntityEditor.ShowWindow(); }
+            if (GUILayout.Button("Item Editor")) { ItemEditor.ShowWindow(); }
+            if (GUILayout.Button("Quest Editor")) { QuestEditor.ShowWindow(); }
         }
     }
 }

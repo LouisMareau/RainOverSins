@@ -3,7 +3,7 @@
 /// DO NOT MODIFY, IN ANY CASE, THIS FILE WITHOUT KNWOING EXACTLY WHAT YOU ARE DOING AND THE STRUCTURE OF THE JSON OBJECTS.
 /// </summary>
 
-namespace RoS.QuestSystem
+namespace RoS.Gameplay.QuestSystem
 {
     using System.Collections.Generic;
 

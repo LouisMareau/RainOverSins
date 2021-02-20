@@ -1,4 +1,4 @@
-namespace RoS.QuestSystem.Utils
+namespace RoS.Gameplay.QuestSystem.Utils
 {
     using System.IO;
     using UnityEngine;

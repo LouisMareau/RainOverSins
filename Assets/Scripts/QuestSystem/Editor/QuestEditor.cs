@@ -1,4 +1,4 @@
-namespace RoS.QuestSystem.Editor 
+namespace RoS.Gameplay.QuestSystem.Editor 
 {
     using System.Collections.Generic;
     using UnityEngine;
@@ -21,7 +21,7 @@ namespace RoS.QuestSystem.Editor
         private List<Quest> parentQuests;
         private List<Quest> childQuests;
 
-        public static void Init() {
+        public static void ShowWindow() {
             window = CreateInstance<QuestEditor>();
             window.Show();
         }

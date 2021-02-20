@@ -5,13 +5,21 @@ namespace RoS.Gameplay.Items.Editor
 
     public class CraftEditor : EditorWindow
     {
-        public static void ShowWindow() {
+        private Item item;
+
+        private void Init(Item item) {
+            
+        }
+
+        public static void ShowWindow(Item item) {
             var window = GetWindow<CraftEditor>();
             window.titleContent = new GUIContent("Craft Bench");
             window.Show();
         }
 
         private void OnGUI() {
+            // Show the core info of the associated item
+
             //* Reference to the item
             //* List of items necessary to craft the item
             //* Amount of gold necessary to complete the craft

@@ -21,7 +21,9 @@ namespace RoS.Gameplay
 
         private void Init() {
             // We initialize the open modals list as an empty list
-            openModals = new List<GameObject>();
+            if (openModals == null) {   
+                openModals = new List<GameObject>();
+            }
 
             // We set the merchant taxes. This taxe should be added to the base cost of every item sold by merchant NPCs
             Market.merchantTaxes = this.merchantTaxes;

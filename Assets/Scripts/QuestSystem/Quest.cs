@@ -1,4 +1,4 @@
-namespace RoS.QuestSystem
+namespace RoS.Gameplay.QuestSystem
 {
     using System.Collections.Generic;
     using UnityEngine;
