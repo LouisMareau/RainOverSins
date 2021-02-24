@@ -7,16 +7,12 @@ namespace RoS.Gameplay
     {
         [Header("UI")]
         /// <summary>
-        /// Must contain every currently open modals (backpack, equipment, skills, NPCs modals, etc...) in order to keep track of opened modals.
+        /// Must contain every currently open modals (backpack, equipment, skills, NPCs modals, etc...) in order to keep track of opened modals
         /// </summary>
         public static List<GameObject> openModals;
 
         [Header("MARKET INFO")]
-        /// <summary>
-        /// The merchant tax over every item in stock.
-        /// </summary>
         public float merchantTaxes = 0.25f;
-
         public float inflation = 1.00f;
 
         private void Init() {
@@ -35,8 +31,7 @@ namespace RoS.Gameplay
             Init();
         }
 
-        private void Start() 
-        {
+        private void Start() {
             Init();
         }
     }
