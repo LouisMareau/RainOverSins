@@ -3,6 +3,7 @@
     using UnityEngine;
 
     using RoS.Gameplay.Equipment;
+    using RoS.HUD;
     
     public class Player : PlayableEntity
     {
@@ -23,6 +24,15 @@
 
             // Local References
             storagesT = transform.Find("Storages");
+
+            // ** This needs to be set from last save when first starting the game and saved before exiting the game
+            stats.health = stats.maxHealth;
+            stats.mana = stats.maxMana;
+
+            // HUD
+            HUDManager.SetName(info.name);
+            HUDManager.SetTitle(info.title);
+            HUDManager.SetBars(stats.maxHealth, stats.health, stats.maxMana, stats.mana);
         }
 
         protected override void Update() {

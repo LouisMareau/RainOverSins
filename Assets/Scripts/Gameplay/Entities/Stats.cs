@@ -126,11 +126,11 @@ namespace RoS.Gameplay
                 mana += ((maxMana * 20) / 100);
                 if (mana > maxMana) { mana = maxMana; }
 
-                UpdateStats();
+                SetStats();
             }
         }
 
-        public void UpdateStats() {
+        public void SetStats() {
             nextLevelExp = GetExpForNextLevel();
 
             // Max Health

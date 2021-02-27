@@ -26,10 +26,27 @@ namespace RoS.Gameplay.Entities
 
         [Header("BATTLE")]
         public BattleState battleState;
+
+        [Header("DEATH-RELATED BATTLE MEMBERS")]
+        [Tooltip("")]
+        public int turnsSinceFainted;
+        /// <summary>
+        /// Amount of turns (of the ongoing battle) the entity has been dead.
+        /// </summary>
         public int turnsSinceDeath;
+        /// <summary>
+        /// Once the entity's HP reaches 0 (zero) for the first time, it faints. This allows the player to try and revive the entity within the next 3 tuns, at which time, the creature will die for good
+        /// </summary>
+        public bool isFainted;
+        /// <summary>
+        /// If the entity's HP has reached 0 (zero) and has been in the faint state for more than 3 turns, the entity is considered dead. 
+        /// Only the item "Pheonix Ashes" is able to revive a dead entity.
+        /// The previously cited item being extremely rare and , the player will be able to bury the fallen entities. 
+        /// </summary>
+        public bool isDead;
 
         protected virtual void OnValidate() {
-            stats.UpdateStats();
+            stats.SetStats();
         }
 
         protected virtual void Awake() {
@@ -39,7 +56,7 @@ namespace RoS.Gameplay.Entities
 
         protected virtual void Update() {
             // Move
-            if (Input.GetMouseButton(0)) {
+            /*if (Input.GetMouseButton(0)) {
                 // We need to make sure that no modal is open in order to do any action in the world
                 if (GameManager.openModals.Count == 0) {
                     // We cast a ray
@@ -57,7 +74,7 @@ namespace RoS.Gameplay.Entities
                         }
                     }
                 }
-            }
+            }*/
             
             // Actions (skills)
             // Interactions
