@@ -48,10 +48,10 @@ MonoBehaviour:
   thumbnail: {fileID: 0}
   weight: 0
   tradeInfo:
-    baseCostGold: 0
-    suggestedCostGold: 0
-    merchantCostGold: 0
-    sellingPriceGold: 0
+    baseCostGold: 60
+    suggestedCostGold: 60
+    merchantCostGold: 75
+    sellingPriceGold: 60
   items: []
   totalWeight: 0
-  maxWeight: 0
+  maxWeight: 8

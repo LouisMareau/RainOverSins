@@ -7,20 +7,20 @@ namespace RoS.Gameplay.Equipment
     public class Equipment
     {
         /// <summary>
-        /// A reference to the backpack gameobject  
+        /// A reference to the backpack gameobject (instanced)
         /// </summary>
         [HideInInspector] public GameObject backpackGO;
         /// <summary>
-        /// A reference to the backpack component
+        /// A reference to the backpack component (instanced)
         /// </summary>
         [HideInInspector] public Backpack backpack;
         [Space()]
         /// <summary>
-        /// A reference to the rift system gameobject
+        /// A reference to the rift system gameobject (instanced)
         /// </summary>
         [HideInInspector] public GameObject rSystemGO;
         /// <summary>
-        /// A reference to the rift system component
+        /// A reference to the rift system component (instanced)
         /// </summary>
         [HideInInspector] public RSystem rSystem;
 
@@ -35,9 +35,9 @@ namespace RoS.Gameplay.Equipment
         public Transform clothingT;
 
         /// <summary>
-        /// Equips the specified piece of equipment on the Entity.
+        /// Equips the specified piece of equipment on the Entity
         /// </summary>
-        /// <param name="obj">The object to equip.</param>
+        /// <param name="obj">The object to equip</param>
         public void Equip(GameObject obj) {
             // The object is a Backpack
             if (obj.GetComponent<Backpack>()) {

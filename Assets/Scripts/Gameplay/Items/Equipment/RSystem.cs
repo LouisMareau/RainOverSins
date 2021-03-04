@@ -1,4 +1,4 @@
-namespace RoS.Gameplay.Items
+namespace RoS.Gameplay.Equipment
 {
     using System.Collections.Generic;
     using UnityEngine;

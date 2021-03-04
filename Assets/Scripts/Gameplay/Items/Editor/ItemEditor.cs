@@ -4,6 +4,8 @@ namespace RoS.Gameplay.Items.Editor
     using UnityEngine;
     using UnityEditor;
 
+    using RoS.Gameplay.Equipment;
+
     public class ItemEditor : EditorWindow
     {
         #region LOCAL FIELDS

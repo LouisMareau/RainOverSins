@@ -1,9 +1,8 @@
 ﻿namespace RoS.Camera
 {
     using UnityEngine;
-    using RoS.Camera.Utils;
-
-    // Entities import
+    using UnityEngine.InputSystem;
+    
     using RoS.Gameplay.Entities;
 
     public class CameraDirector : MonoBehaviour
@@ -20,6 +19,7 @@
         public Vector3 tacticalBaseRotation;
 
         [Header("CINEMATIC MODE")]
+        public float movementSpeed;
         public Vector3 cinematicBaseOffset;
         public Vector3 cinematicBaseRotation;
 
@@ -30,6 +30,10 @@
         private Transform playerPOI; // A reference to the player's Point of Interest (Character.Player.pointOfInterest) 
 
         public Vector3 offset; // The offset of the camera (should be placed somewhere behind the player that doesn't obstruct visibility and offers a dynamic cinematic POV)
+
+        private void Awake() {
+            GameObject.Find("Player Input").GetComponent<PlayerInput>().onActionTriggered += HandleAction;
+        }
 
         private void Start() {
             playerT = player.transform;
@@ -45,7 +49,18 @@
             }
         }
 
+        private void HandleAction(InputAction.CallbackContext ctx) {
+            // Moves the Camera >> ZQSD keys
+            if (ctx.action.name == "MoveCamera") {
+                MoveCamera(ctx.ReadValue<Vector2>(), movementSpeed);
+            }
+        }
+
         #region BEHAVIOUR
+        public void MoveCamera(Vector2 direction, float speed) {
+            main.transform.Translate(direction.x * movementSpeed, 0, direction.y * movementSpeed, Space.World);
+        }
+
         public void Define(Transform target) {
             switch (cameraType) {
                 // Cinematic camera behaviour (Third-Person view)

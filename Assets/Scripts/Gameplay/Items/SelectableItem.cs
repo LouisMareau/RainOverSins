@@ -4,6 +4,7 @@ namespace RoS.Gameplay.Items
     using TMPro;
     using RoS.Gameplay.Entities;
     using RoS.Gameplay.Entities.UI;
+    using RoS.Gameplay.Equipment;
 
     [System.Serializable]
     public class SelectableItem : MonoBehaviour
