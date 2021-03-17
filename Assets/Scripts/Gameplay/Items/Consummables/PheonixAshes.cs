@@ -22,15 +22,13 @@ namespace RoS.Gameplay.Items
         /// </summary>
         /// <param name="entity">The playable entity this item will be used on.</param>
         /// <returns>Returns the exit code with the value of the output depending on the state of the entity passed as argument.</returns>
-        public ExitCode Use(PlayableEntity entity) {
+        public void Use(PlayableEntity entity) {
             float health = entity.stats.health;
             float maxHealth = entity.stats.maxHealth;
             float regen = entity.stats.healthRegen;
 
-            // To be usable, the entity needs to be recently dead (within the last three (3) turns)
-            if (entity.battleState == PlayableEntity.BattleState.ALIVE) { return ExitCode.Entity_Alive; }
-            else if (entity.battleState == PlayableEntity.BattleState.DEAD_LATE) { return ExitCode.Entity_Dead_Late; }
-            else if (entity.battleState == PlayableEntity.BattleState.DEAD_RECENTLY) {
+            // To be usable, the entity needs to be dead (cannot work on FAINTED and ALIVE entity)
+            if (entity.state == PlayableEntity.State.DEAD) {
                 // We heal the entity's health by the healing amount
                 health += (maxHealth * (healingPercentageAfterRevive / 100));
                 // We add the extra regen to the base regen of the creature
@@ -40,7 +38,6 @@ namespace RoS.Gameplay.Items
                 // We create a new status for the entity
                 entity.statuses.Add(new Status(Status.Type.REGENERATION, regen, regenDuration));
             }
-            return ExitCode.Success;
         }
     }
 }

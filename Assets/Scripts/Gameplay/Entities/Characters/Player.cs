@@ -2,6 +2,7 @@
 {   
     using UnityEngine;
     using UnityEngine.InputSystem;
+    using UnityEngine.AI;
 
     using RoS.Camera;
     using RoS.Gameplay.Equipment;
@@ -48,11 +49,8 @@
             equipment.Equip(startRSystem);
         }
 
-        private void Update() {            
-            // Use stamina while moving during a battle
-
-            // We look for points of interest around the player sight
-            LookForPointsOfInterest();
+        private void Update() {
+            
         }
 
         private void HandleAction(InputAction.CallbackContext ctx) {
@@ -72,37 +70,34 @@
                     // In case we hit the ground/terrain, we move to the clicked location
                     if (hit.collider.gameObject.tag == "Terrain" && playableEntity.navMeshAgent.isOnNavMesh) {
                         playableEntity.navMeshAgent.SetDestination(hit.point);
+                        
                     }
 
                     // In case we hit an NPC, we start an interaction with the NPC
                     if (hit.collider.gameObject.tag == "NPC") {
                         hit.collider.gameObject.GetComponent<NPC>().OnSelection();
                     }
+
+                    // In case we hit an entity, we start an interaction with the entity
+                    if (hit.collider.gameObject.tag == "Entity") {
+                        // CODE HERE...
+                        // ==> Start battle
+                        
+                    }
                 }
             }
         }
-        
-        public Transform LookForPointsOfInterest() {
-            // First, we check if we are already looking at a point of interest
-            if (pointOfInterest != null) {
-                if (Vector3.Distance(this.transform.position, pointOfInterest.position) < poiMaxDistanceCheck) {
-                    return pointOfInterest;
-                }
-            }
 
-            // If we didn't find any point of interest in the area, we first trace a line (of sight) in front of the player
-            Vector3 lineOfSight = this.transform.position + Vector3.forward * poiMaxDistanceCheck; 
-            // Then, at the end of the line of sight, we cast a sphere to check for a point of interest in the area (bit shift on the PoI layer)
-            int mask = 1 << 9;
-            Collider[] pois = Physics.OverlapSphere(lineOfSight, poiSearchRadius, mask);
-            if (pois != null && pois.Length > 0) {
-                // If the is a point of interest in the area, we return the point of interest
-                pointOfInterest = pois[0].transform;
-            }
-
-            // Otherwise, we return a null object
-            return null;
+        #region NAVMESH
+        private bool IsMoving() {
+            NavMeshAgent agent = playableEntity.navMeshAgent;
+            return (agent.hasPath && agent.remainingDistance > 0) ? true : false;
         }
+        private bool HasArrivedToDestination() {
+            NavMeshAgent agent = playableEntity.navMeshAgent;
+            return (agent.hasPath && agent.remainingDistance < 0.1f) ? true : false;
+        }
+        #endregion
         
         #region MISC
         private void OnDrawGizmosSelected() {

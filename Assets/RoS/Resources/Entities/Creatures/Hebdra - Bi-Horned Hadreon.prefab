@@ -177,8 +177,6 @@ MonoBehaviour:
     focus: 1
   statuses: []
   navMeshAgent: {fileID: 0}
-  battleState: 0
+  state: 0
   turnsSinceFainted: 0
   turnsSinceDeath: 0
-  isFainted: 0
-  isDead: 0

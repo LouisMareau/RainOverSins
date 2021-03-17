@@ -8,4 +8,16 @@ namespace RoS.Camera.Utils
         CINEMATIC,
         TACTICAL
     }
+
+    public enum CameraMovementState {
+        IDLE,
+        UP,
+        UP_LEFT,
+        UP_RIGHT,
+        DOWN,
+        DOWN_LEFT,
+        DOWN_RIGHT,
+        LEFT,
+        RIGHT
+    }
 }

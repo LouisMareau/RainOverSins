@@ -15,6 +15,9 @@ namespace RoS.Gameplay
         public float merchantTaxes = 0.25f;
         public float inflation = 1.00f;
 
+        [Header("ENTITIES")]
+        public static int maxTurnsBeforeDeath = 3;
+
         private void Init() {
             // We initialize the open modals list as an empty list
             if (openModals == null) {   

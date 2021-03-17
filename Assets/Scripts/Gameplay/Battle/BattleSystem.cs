@@ -5,18 +5,23 @@ namespace RoS.Gameplay.BattleSystem
 
     public class BattleSystem : MonoBehaviour
     {
-        private int turn;
+
+        [Header("CORE")]
         public int maxTurns;
+        public float maxTimePerTurn;
 
-        private float timer; 
+        public Battle ongoingBattle { get; private set;}
 
-        public Battle ongoingBattle;
+        [Header("REFS")]
+        public GameObject battleUI;
 
         public void StartBattle(List<Entity> allies, List<Entity> opponents) {
-            ongoingBattle = new Battle(allies, opponents);
-        }
+            Battle battle = new GameObject("Battle").AddComponent<Battle>();
+            ongoingBattle = Instantiate<Battle>(battle, Vector3.zero, Quaternion.identity, this.transform);
 
-        public int GetCurrentTurn() { return turn; }
-        public float GetTimer() { return timer; }
+            // We setup the battle members
+            ongoingBattle.InitBattle(this);
+            ongoingBattle.SetActors(allies, opponents);
+        }
     }
 }

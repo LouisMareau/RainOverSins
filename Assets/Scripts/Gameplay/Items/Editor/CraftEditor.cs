@@ -1,8 +1,7 @@
-namespace RoS.Gameplay.Items.Editor
+namespace RoS.Gameplay.Items
 {
     using UnityEngine;
     using UnityEditor;
-
     public class CraftEditor : EditorWindow
     {
         private Item item;
